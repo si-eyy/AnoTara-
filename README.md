@@ -406,11 +406,11 @@ __pycache__/
 
 **Batangas State University**
 College of Informatics and Computing Sciences | CICS Alangilan
-Course: *Introduction to Computing / Python Programming*
+Course: *Advance Computer Programming*
 
 ---
 
 ## 📄 License
 
 This project is developed for **academic purposes only**.
-© Batangas State University — College of Informatics and Computing Sciences
+© Charles V. Amelano - 24-09048@g.batstate-u.edu.ph 📩
