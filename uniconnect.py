@@ -686,16 +686,14 @@ class AnoTaraApp(tk.Tk):
             tk.Label(body, text=f"👥  {mem_cnt} member{'s' if mem_cnt!=1 else ''}",
                      bg=C["card"], fg=C["muted"], font=F["small"]).pack(anchor="w")
 
-            btn_area = tk.Frame(card, bg=C["card"], padx=16)
+            btn_area = tk.Frame(card, bg=C["card"], padx=20, pady=20)
             btn_area.pack(side="right", fill="y")
-            btn_inner = tk.Frame(btn_area, bg=C["card"])
-            btn_inner.place(relx=0.5, rely=0.5, anchor="center")
             if joined:
-                tk.Label(btn_inner, text="✓  Joined", bg=C["card"],
-                         fg=C["success"], font=F["subhead"]).pack()
+                tk.Label(btn_area, text="✓  Joined", bg=C["card"],
+                         fg=C["success"], font=F["subhead"]).pack(expand=True)
             else:
-                btn(btn_inner, "Join", padx=22, pady=8,
-                    command=lambda o=oid, n=name: self._join_org(o, n, joined_ids, frame)).pack()
+                btn(btn_area, "  Join  ", padx=18, pady=8,
+                    command=lambda o=oid, n=name: self._join_org(o, n, joined_ids, frame)).pack(expand=True)
 
     def _join_org(self, org_id, org_name, joined_ids, frame):
         try:
@@ -770,16 +768,14 @@ class AnoTaraApp(tk.Tk):
                 tk.Label(tags, text=i, bg=C["accent"]+"33", fg=C["accent3"],
                          font=F["small"], padx=8, pady=3).pack(side="left", padx=3)
 
-            btn_a = tk.Frame(card, bg=C["card"], padx=16)
+            btn_a = tk.Frame(card, bg=C["card"], padx=20, pady=20)
             btn_a.pack(side="right", fill="y")
-            bi = tk.Frame(btn_a, bg=C["card"])
-            bi.place(relx=0.5,rely=0.5,anchor="center")
             if peer_id in connected:
-                tk.Label(bi, text="✓  Connected", bg=C["card"],
-                         fg=C["success"], font=F["subhead"]).pack()
+                tk.Label(btn_a, text="✓  Connected", bg=C["card"],
+                         fg=C["success"], font=F["subhead"]).pack(expand=True)
             else:
-                btn(bi, "Connect", padx=18, pady=7,
-                    command=lambda pid=peer_id, pn=peer_name: self._connect_peer(pid, pn, connected)).pack()
+                btn(btn_a, "  Connect  ", padx=18, pady=7,
+                    command=lambda pid=peer_id, pn=peer_name: self._connect_peer(pid, pn, connected)).pack(expand=True)
 
     def _connect_peer(self, peer_id, peer_name, connected):
         try:
