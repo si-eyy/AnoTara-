@@ -9,6 +9,7 @@
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
+- [Sample Run](#️-sample-run)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Getting Started](#-getting-started)
@@ -24,7 +25,7 @@
 
 ## 🌐 Overview
 
-UniConnect solves three core problems faced by college students:
+AnoTara? solves three core problems faced by college students:
 
 | Problem | Solution |
 |---|---|
@@ -33,6 +34,131 @@ UniConnect solves three core problems faced by college students:
 | Difficulty finding peers | Interest-based peer matching ranked by shared affinities |
 
 Access is restricted to **BSU university email addresses only** (`@g.batstate-u.edu.ph` / `@batstate-u.edu.ph`), ensuring a safe and exclusive campus environment.
+
+---
+
+## 🖥️ Sample Run
+
+A walkthrough of AnoTara from login to engagement report, using a real student account.
+
+---
+
+### 1. 🔐 Login Screen
+
+The app opens with a split-panel login screen. Students enter their BSU Student ID (`YY-XXXXX` format) and password. Only registered BSU accounts can sign in. New users can click **"Don't have an account? Register"** to create one.
+
+> 📌 _Screenshot: Login window with BSU branding on the left panel and sign-in form on the right._
+
+---
+
+### 2. 📝 Register Screen
+
+New students fill out their full name, Student ID, BSU email (`@g.batstate-u.edu.ph`), password, and select their interests from 12 available options (Programming, Robotics, Mathematics, Photography, etc.). The app validates all fields before creating the account in Supabase.
+
+> 📌 _Screenshot: Registration form with interest checkboxes and Create Account button._
+
+---
+
+### 3. 🏠 Dashboard
+
+After login, the student lands on their personalized dashboard. Live stat cards are fetched from Supabase in real time.
+
+**Student:** Charles V. Amelano — ID: 24-09048
+
+| Stat | Value |
+|---|---|
+| 🏛️ Orgs Joined | **2** |
+| 💬 Messages Sent | **0** |
+| 🤝 Peers Connected | **0** |
+| ⭐ Engagement Score | **20** |
+
+The **Your Interests** panel shows tagged interest badges (e.g. `Programming`). The **Icebreaker of the Day** card shows a random conversation prompt — _"Share a fun fact about yourself! 🎉"_ — with a **New Prompt** button to refresh it.
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### 4. 🏛️ Organization Directory
+
+The Organization Directory lists all university organizations pulled from Supabase. Students can filter by category using the dropdown (All, Academic, Advocacy, Arts, Communication, Leadership, Technology).
+
+Each card shows the organization name, category badge, description, and live member count. Students who have already joined see a **✓ Joined** label; others see a **Join** button.
+
+**Charles has joined:**
+- ✅ Computer Science Society *(Academic)* — 1 member
+- ✅ Debate Society *(Communication)* — 1 member
+
+**Available to join:**
+- Environmental Advocates *(Advocacy)*
+- Game Developers Circle *(Technology)*
+- Math Wizards *(Academic)*
+- *(and more...)*
+
+![Organizations](screenshots/organizations.png)
+
+---
+
+### 5. 🤝 Peer Matching
+
+The Peer Matching screen uses **Python set intersection** to compare the logged-in student's interests against all other registered students. Matches are ranked by the number of shared interests.
+
+Since Charles is currently the only registered student, the screen shows:
+
+> 🔍 _"No peer matches yet. More students need to register!"_
+
+Once more students register with overlapping interests (e.g. Programming, Leadership), they will appear here ranked by compatibility with a **Connect** button.
+
+![Peer Matching](screenshots/peer_matching.png)
+
+---
+
+### 6. 💬 Global Chat Room
+
+The Global Chat Room connects all registered students campus-wide. Messages are stored in Supabase and persist across sessions. The right sidebar shows a **Conversation Starter** prompt — _"What's the best advice you've ever received?"_ — with a **New** button to refresh it.
+
+Students type in the input bar at the bottom and send with **Enter** or the **Send ➤** button. Messages are color-coded: your messages appear in blue, others in indigo.
+
+![Chat Room](screenshots/chat_room.png)
+
+---
+
+### 7. 📊 My Engagement Report
+
+The Engagement Report gives a full summary of the student's campus participation, pulled live from Supabase.
+
+**Profile:**
+- Name: Charles V. Amelano
+- Student ID: 24-09048
+- Email: 24-09048@g.batstate-u.edu.ph
+- Member since: 2026-04-29 08:54
+
+| Metric | Value |
+|---|---|
+| Orgs Joined | **2 / 10** |
+| Participation Rate | **20.0%** |
+| Messages Sent | **0** |
+| Peers Connected | **0** |
+| Engagement Score ⭐ | **20** |
+
+**Organizations joined:**
+- Computer Science Society *(Academic)*
+- Debate Society *(Communication)*
+
+**Connected Peers:**
+> _"No peers connected yet. Try Peer Matching! 🔍"_
+
+![My Report](screenshots/report.png)
+
+---
+
+### 8. 🛠️ Admin Panel *(admin accounts only)*
+
+Admins see a platform-wide analytics panel with total student count, organization count, chat messages, and memberships. A **Top Students** leaderboard ranks all users by engagement score, and an **Org Membership** breakdown shows member counts per organization.
+
+> To promote a student to admin, run in Supabase SQL Editor:
+> ```sql
+> UPDATE students SET role = 'admin' WHERE student_id = '24-09048';
+> ```
 
 ---
 
@@ -109,8 +235,8 @@ Access is restricted to **BSU university email addresses only** (`@g.batstate-u.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/uniconnect.git
-cd uniconnect
+git clone https://github.com/YOUR_USERNAME/AnoTara-.git
+cd anotara
 
 # 2. No pip install needed — runs entirely on standard library
 python main.py
@@ -297,7 +423,7 @@ chat_messages
 START
   │
   ▼
-UniConnectApp.__init__()
+AnoTaraApp.__init__()
   └── _show_auth()  ←  hides main window, opens AuthWindow
         │
         ├── [Login]
@@ -346,7 +472,7 @@ Sidebar Navigation
 ## 📁 Project Structure
 
 ```
-uniconnect/
+anotara/
 ├── main.py        # Entire application — UI, Supabase REST, all logic
 ├── README.md      # This file
 └── .gitignore
@@ -375,7 +501,7 @@ __pycache__/
 | `valid_sid(sid)` | Validates Student ID format `YY-XXXXX` |
 | `is_bsu_email(email)` | Checks for valid BSU email domain |
 | `AuthWindow` | Tkinter `Toplevel` for login and registration flows |
-| `UniConnectApp` | Main `Tk` application with sidebar navigation |
+| `AnoTaraApp` | Main `Tk` application with sidebar navigation |
 | `_show_dashboard()` | Live stat cards, interest tags, icebreaker widget |
 | `_show_organizations()` | Filterable org directory with join functionality |
 | `_refresh_orgs()` | Re-renders org cards on category filter change |
@@ -406,11 +532,11 @@ __pycache__/
 
 **Batangas State University**
 College of Informatics and Computing Sciences | CICS Alangilan
-Course: *Advance Computer Programming*
+Course: *Advanced Computer Programming*
 
 ---
 
 ## 📄 License
 
 This project is developed for **academic purposes only**.
-© Charles V. Amelano - 24-09048@g.batstate-u.edu.ph 📩
+© Charles Amelano - 24-09048@g.batstate-u.edu.ph
