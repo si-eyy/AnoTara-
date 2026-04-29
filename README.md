@@ -47,7 +47,7 @@ A walkthrough of AnoTara from login to engagement report, using a real student a
 
 The app opens with a split-panel login screen. Students enter their BSU Student ID (`YY-XXXXX` format) and password. Only registered BSU accounts can sign in. New users can click **"Don't have an account? Register"** to create one.
 
-> 📌 _Screenshot: Login window with BSU branding on the left panel and sign-in form on the right._
+![Log In](screenshots/log_in.png)
 
 ---
 
@@ -55,7 +55,7 @@ The app opens with a split-panel login screen. Students enter their BSU Student 
 
 New students fill out their full name, Student ID, BSU email (`@g.batstate-u.edu.ph`), password, and select their interests from 12 available options (Programming, Robotics, Mathematics, Photography, etc.). The app validates all fields before creating the account in Supabase.
 
-> 📌 _Screenshot: Registration form with interest checkboxes and Create Account button._
+![Register](screenshots/register.png)
 
 ---
 
